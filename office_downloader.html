@@ -54,7 +54,7 @@
 <body>
     <h1>Office Downloader</h1>
     <label for="osSelect">Choose your OS:</label>
-    <select id="osSelect">
+    <select id="osSelect" onchange="updateSoftwareOptions()">
         <option value="windows">Windows</option>
         <option value="mac">Mac ARM</option>
     </select>
@@ -65,8 +65,6 @@
         <option value="Excel">Excel</option>
         <option value="PowerPoint">PowerPoint</option>
         <option value="Visio">Visio</option>
-        <option value="OfficeMac">Office for Mac</option>
-        <option value="VisioMac">Visio for Mac</option>
         <option value="OfficeHome">Office for Home</option>
     </select>
     <button onclick="downloadFile()">Download</button>
@@ -100,6 +98,26 @@
             return facts[Math.floor(Math.random() * facts.length)];
         }
 
+        function updateSoftwareOptions() {
+            const osSelect = document.getElementById('osSelect');
+            const softwareSelect = document.getElementById('softwareSelect');
+            const os = osSelect.value;
+
+            softwareSelect.innerHTML = '';
+
+            if (os === 'windows') {
+                softwareSelect.innerHTML += '<option value="Office365">Office 365</option>';
+                softwareSelect.innerHTML += '<option value="Word">Word</option>';
+                softwareSelect.innerHTML += '<option value="Excel">Excel</option>';
+                softwareSelect.innerHTML += '<option value="PowerPoint">PowerPoint</option>';
+                softwareSelect.innerHTML += '<option value="Visio">Visio</option>';
+                softwareSelect.innerHTML += '<option value="OfficeHome">Office for Home</option>';
+            } else if (os === 'mac') {
+                softwareSelect.innerHTML += '<option value="OfficeMac">Office for Mac</option>';
+                softwareSelect.innerHTML += '<option value="VisioMac">Visio for Mac</option>';
+            }
+        }
+
         function downloadFile() {
             const osSelect = document.getElementById('osSelect');
             const softwareSelect = document.getElementById('softwareSelect');
@@ -114,7 +132,7 @@
 
                 // Create a dancing animation in the container
                 const animationContainer = document.getElementById('animationContainer');
-                animationContainer.innerHTML = '<div class="dancer">down💃loading</div>';
+                animationContainer.innerHTML = '<div class="dancer">💃</div>';
                 const dancer = document.querySelector('.dancer');
                 dancer.classList.add('animate');
 
@@ -133,6 +151,8 @@
                 alert('Invalid selection. Please choose a valid option.');
             }
         }
+
+        window.onload = updateSoftwareOptions; // Update options on load
     </script>
 </body>
 </html>
