@@ -11,8 +11,9 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #e0f7fa;
             color: #333;
+            background-size: cover;
+            transition: background-image 1s ease-in-out;
         }
         h1 {
             color: #00796b;
@@ -33,7 +34,7 @@
             background-color: #004d40;
         }
         .animate {
-            animation: dance 1s infinite;
+            animation: dance 1s infinite, changeColor 1s infinite;
         }
         @keyframes dance {
             0%, 100% {
@@ -41,6 +42,14 @@
             }
             50% {
                 transform: translateY(-10px);
+            }
+        }
+        @keyframes changeColor {
+            0%, 100% {
+                background-color: #00796b;
+            }
+            50% {
+                background-color: #004d40;
             }
         }
         .fact {
@@ -59,14 +68,7 @@
         <option value="mac">Mac ARM</option>
     </select>
     <label for="softwareSelect">Choose the software to download:</label>
-    <select id="softwareSelect">
-        <option value="Office365">Office 365</option>
-        <option value="Word">Word</option>
-        <option value="Excel">Excel</option>
-        <option value="PowerPoint">PowerPoint</option>
-        <option value="Visio">Visio</option>
-        <option value="OfficeHome">Office for Home</option>
-    </select>
+    <select id="softwareSelect"></select>
     <button onclick="downloadFile()">Download</button>
     <div id="animationContainer"></div>
     <div id="factContainer" class="fact"></div>
@@ -94,6 +96,14 @@
             "There are more stars in the universe than grains of sand on all the Earth's beaches."
         ];
 
+        const backgrounds = [
+            "https://images.unsplash.com/photo-1495555687398-3f80d6ed8675",
+            "https://images.unsplash.com/photo-1495592528444-6329b71d37b6",
+            "https://images.unsplash.com/photo-1495591967122-1e69fa0eb173",
+            "https://images.unsplash.com/photo-1495640452828-14db9d5c8659",
+            "https://images.unsplash.com/photo-1495592374679-dc4e3e10e216"
+        ];
+
         function getRandomFact() {
             return facts[Math.floor(Math.random() * facts.length)];
         }
@@ -116,6 +126,10 @@
                 softwareSelect.innerHTML += '<option value="OfficeMac">Office for Mac</option>';
                 softwareSelect.innerHTML += '<option value="VisioMac">Visio for Mac</option>';
             }
+        }
+
+        function changeBackground() {
+            document.body.style.backgroundImage = `url(${backgrounds[Math.floor(Math.random() * backgrounds.length)]})`;
         }
 
         function downloadFile() {
@@ -152,6 +166,8 @@
             }
         }
 
+        // Change background every 10 seconds
+        setInterval(changeBackground, 10000);
         window.onload = updateSoftwareOptions; // Update options on load
     </script>
 </body>
