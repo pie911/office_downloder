@@ -74,18 +74,19 @@
     <div id="factContainer" class="fact"></div>
 
     <script>
-        const windowsUrls = {
-            "Office365": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
-            "Word": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Word2024Retail.img",
-            "Excel": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Excel2024Retail.img",
-            "PowerPoint": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/PowerPoint2024Retail.img",
-            "Visio": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img",
-            "OfficeHome": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Home2024Retail.img"
-        };
-
-        const macUrls = {
-            "OfficeMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
-            "VisioMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img"
+        const urls = {
+            "windows": {
+                "Office365": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
+                "Word": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Word2024Retail.img",
+                "Excel": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Excel2024Retail.img",
+                "PowerPoint": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/PowerPoint2024Retail.img",
+                "Visio": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img",
+                "OfficeHome": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Home2024Retail.img"
+            },
+            "mac": {
+                "OfficeMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
+                "VisioMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img"
+            }
         };
 
         const facts = [
@@ -104,13 +105,7 @@
             const softwareSelect = document.getElementById('softwareSelect');
             const os = osSelect.value;
             const selectedSoftware = softwareSelect.value;
-            let url;
-
-            if (os === 'windows') {
-                url = windowsUrls[selectedSoftware];
-            } else if (os === 'mac') {
-                url = macUrls[selectedSoftware];
-            }
+            let url = urls[os][selectedSoftware];
 
             if (url) {
                 // Add dancing animation to the button
@@ -119,7 +114,7 @@
 
                 // Create a dancing animation in the container
                 const animationContainer = document.getElementById('animationContainer');
-                animationContainer.innerHTML = '<div class="dancer">Dow💃Loading</div>';
+                animationContainer.innerHTML = '<div class="dancer">down💃loading</div>';
                 const dancer = document.querySelector('.dancer');
                 dancer.classList.add('animate');
 
