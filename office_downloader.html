@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Office Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e0f7fa;
+            color: #333;
+        }
+        h1 {
+            color: #00796b;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #00796b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        .animate {
+            animation: dance 1s infinite;
+        }
+        @keyframes dance {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .fact {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Office Downloader</h1>
+    <label for="osSelect">Choose your OS:</label>
+    <select id="osSelect">
+        <option value="windows">Windows</option>
+        <option value="mac">Mac ARM</option>
+    </select>
+    <label for="softwareSelect">Choose the software to download:</label>
+    <select id="softwareSelect">
+        <option value="Office365">Office 365</option>
+        <option value="Word">Word</option>
+        <option value="Excel">Excel</option>
+        <option value="PowerPoint">PowerPoint</option>
+        <option value="Visio">Visio</option>
+        <option value="OfficeMac">Office for Mac</option>
+        <option value="VisioMac">Visio for Mac</option>
+        <option value="OfficeHome">Office for Home</option>
+    </select>
+    <button onclick="downloadFile()">Download</button>
+    <div id="animationContainer"></div>
+    <div id="factContainer" class="fact"></div>
+
+    <script>
+        const windowsUrls = {
+            "Office365": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
+            "Word": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Word2024Retail.img",
+            "Excel": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Excel2024Retail.img",
+            "PowerPoint": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/PowerPoint2024Retail.img",
+            "Visio": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img",
+            "OfficeHome": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Home2024Retail.img"
+        };
+
+        const macUrls = {
+            "OfficeMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
+            "VisioMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img"
+        };
+
+        const facts = [
+            "Did you know? The Eiffel Tower can be 15 cm taller during the summer.",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.",
+            "Bananas are berries, but strawberries aren't.",
+            "There are more stars in the universe than grains of sand on all the Earth's beaches."
+        ];
+
+        function getRandomFact() {
+            return facts[Math.floor(Math.random() * facts.length)];
+        }
+
+        function downloadFile() {
+            const osSelect = document.getElementById('osSelect');
+            const softwareSelect = document.getElementById('softwareSelect');
+            const os = osSelect.value;
+            const selectedSoftware = softwareSelect.value;
+            let url;
+
+            if (os === 'windows') {
+                url = windowsUrls[selectedSoftware];
+            } else if (os === 'mac') {
+                url = macUrls[selectedSoftware];
+            }
+
+            if (url) {
+                // Add dancing animation to the button
+                const button = document.querySelector('button');
+                button.classList.add('animate');
+
+                // Create a dancing animation in the container
+                const animationContainer = document.getElementById('animationContainer');
+                animationContainer.innerHTML = '<div class="dancer">Dow💃Loading</div>';
+                const dancer = document.querySelector('.dancer');
+                dancer.classList.add('animate');
+
+                // Show a random fact
+                const factContainer = document.getElementById('factContainer');
+                factContainer.innerHTML = getRandomFact();
+
+                // Redirect to the download URL after a short delay
+                setTimeout(() => {
+                    window.location.href = url;
+                    // Remove animation
+                    button.classList.remove('animate');
+                    animationContainer.innerHTML = '';
+                }, 2000); // 2 seconds delay to show animation
+            } else {
+                alert('Invalid selection. Please choose a valid option.');
+            }
+        }
+    </script>
+</body>
+</html>
