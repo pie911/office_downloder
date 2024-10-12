@@ -2,66 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Office Downloader</title>
+    <title>Dynamic Office Downloader</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            color: #333;
             background-size: cover;
             transition: background-image 1s ease-in-out;
+            color: #333;
         }
         h1 {
             color: #00796b;
+            text-shadow: 2px 2px 4px #000;
         }
         select, button {
             padding: 10px;
             margin: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            font-size: 1em;
         }
         button {
             background-color: #00796b;
             color: white;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         button:hover {
             background-color: #004d40;
+            transform: scale(1.05);
         }
         .animate {
             animation: dance 1s infinite, changeColor 1s infinite;
         }
         @keyframes dance {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         @keyframes changeColor {
-            0%, 100% {
-                background-color: #00796b;
-            }
-            50% {
-                background-color: #004d40;
-            }
+            0%, 100% { background-color: #00796b; }
+            50% { background-color: #004d40; }
         }
         .fact {
             margin-top: 20px;
             font-size: 1.2em;
             font-style: italic;
             color: #00796b;
+            text-shadow: 1px 1px 2px #000;
         }
     </style>
 </head>
 <body>
-    <h1>Office Downloader</h1>
+    <h1>Dynamic Office Downloader</h1>
     <label for="osSelect">Choose your OS:</label>
     <select id="osSelect" onchange="updateSoftwareOptions()">
         <option value="windows">Windows</option>
@@ -76,6 +72,8 @@
     <script>
         const urls = {
             "windows": {
+                "Windows11": "https://www.microsoft.com/en-in/software-download/windows11",
+                "Windows10": "https://www.microsoft.com/en-in/software-download/windows10",
                 "Office365": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
                 "Word": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Word2024Retail.img",
                 "Excel": "https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Excel2024Retail.img",
@@ -84,6 +82,7 @@
                 "OfficeHome": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Home2024Retail.img"
             },
             "mac": {
+                "macOS": "https://osxdaily.com/where-download-macos-installers/",
                 "OfficeMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/ProPlus2024Retail.img",
                 "VisioMac": "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/Visio2024Retail.img"
             }
@@ -116,6 +115,8 @@
             softwareSelect.innerHTML = '';
 
             if (os === 'windows') {
+                softwareSelect.innerHTML += '<option value="Windows11">Windows 11</option>';
+                softwareSelect.innerHTML += '<option value="Windows10">Windows 10</option>';
                 softwareSelect.innerHTML += '<option value="Office365">Office 365</option>';
                 softwareSelect.innerHTML += '<option value="Word">Word</option>';
                 softwareSelect.innerHTML += '<option value="Excel">Excel</option>';
@@ -123,6 +124,7 @@
                 softwareSelect.innerHTML += '<option value="Visio">Visio</option>';
                 softwareSelect.innerHTML += '<option value="OfficeHome">Office for Home</option>';
             } else if (os === 'mac') {
+                softwareSelect.innerHTML += '<option value="macOS">macOS</option>';
                 softwareSelect.innerHTML += '<option value="OfficeMac">Office for Mac</option>';
                 softwareSelect.innerHTML += '<option value="VisioMac">Visio for Mac</option>';
             }
